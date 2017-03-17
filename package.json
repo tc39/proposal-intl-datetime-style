@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "ecma402-datetime-style",
+  "description": "DateTimeFormat styles proposal for ECMA402",
+  "keywords": [
+    "tc39",
+    "javascript",
+    "ecmascript",
+    "spec",
+    "ecma402"
+  ],
+  "version": "1.0.0-pre",
+  "author": "Zibi Braniecki <zibi@braniecki.net>",
+  "license": "WTFPL",
+  "repository": "zbraniecki/proposal-ecma402-datetime-style",
+  "scripts": {
+    "spec": "ecmarkup spec.html out/index.html",
+    "watch": "ecmarkup --watch spec.html out/index.html"
+  },
+  "devDependencies": {
+    "ecmarkup": "^3.3.1"
+  }
+}
