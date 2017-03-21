@@ -4,7 +4,7 @@
 
 Current Stage:
 
- * 🚀 __Stage 0__
+ * 🚀 __Stage 1__
 
 Spec Text:
 
