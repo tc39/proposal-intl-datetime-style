@@ -1,5 +1,7 @@
 ## dateStyle and timeStyle option on Intl.DateTimeFormat API Specification [draft]
 
+This proposal adds two options to `Intl.DateTimeFormat`: `dateStyle` and `timeStyle`. These options give a compact way to request the appropriate, locale-specific way to ask for a date and time of given lengths.
+
 ### Status
 
 Current Stage:
