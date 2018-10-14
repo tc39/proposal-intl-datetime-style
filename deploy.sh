@@ -3,7 +3,7 @@
 set -ev
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
-if [[ "$TRAVIS_PULL_REQUEST" != "false" || "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]]; then
+if [[ "$TRAVIS_BRANCH" != master ]]; then
   echo "Skipping deploy; just doing a build."
   npm run build
   exit 0
@@ -27,4 +27,3 @@ $(npm bin)/update-branch --commands "npm run build" \
                          --directory "out" \
                          --distribution-branch "gh-pages" \
                          --source-branch "master"
-
