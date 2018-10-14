@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "proposal-ecma402-datetime-style",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "ECMAScript date/time style proposal",
   "repository": "tc39/proposal-ecma402-datetime-style",
   "author": "Ecma TC39",
