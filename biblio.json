@@ -1,0 +1,54 @@
+{
+  "https://tc39.github.io/ecma402/": [
+    {
+      "type": "op",
+      "aoid": "BasicFormatMatcher",
+      "id": "sec-basicformatmatcher"
+    },
+    {
+      "type": "op",
+      "aoid": "BestFitFormatMatcher",
+      "id": "sec-bestfitformatmatcher"
+    },
+    {
+      "type": "op",
+      "aoid": "CanonicalizeLocaleList",
+      "id": "sec-canonicalizelocalelist"
+    },
+    {
+      "type": "op",
+      "aoid": "CanonicalizeTimeZoneName",
+      "id": "sec-canonicalizetimezonename"
+    },
+    {
+      "type": "op",
+      "aoid": "DefaultTimeZone",
+      "id": "sec-defaulttimezone"
+    },
+    {
+      "type": "op",
+      "aoid": "IsValidTimeZoneName",
+      "id": "sec-isvalidtimezonename"
+    },
+    {
+      "type": "op",
+      "aoid": "GetOption",
+      "id": "sec-getoption"
+    },
+    {
+      "type": "op",
+      "aoid": "ResolveLocale",
+      "id": "sec-resolvelocale"
+    },
+    {
+      "type": "op",
+      "aoid": "SupportedLocales",
+      "id": "sec-supportedlocales"
+    },
+    {
+      "type": "op",
+      "aoid": "UnwrapDateTimeFormat",
+      "id": "sec-unwrapdatetimeformat"
+    }
+  ]
+}
