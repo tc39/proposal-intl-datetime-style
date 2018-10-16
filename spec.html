@@ -7,6 +7,8 @@ copyright: false
 contributors: Zibi Braniecki, Daniel Ehrenberg
 </pre>
 
+<emu-biblio href="./biblio.json"></emu-biblio>
+
 <emu-intro>
   <h1>Introduction</h1>
 
@@ -106,7 +108,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. Return _dateTimeFormat_.
       </emu-alg>
     </emu-clause>
-    <emu-clause id="sec-date-time-style-pattern">
+    <emu-clause id="sec-date-time-style-pattern" aoid="DateTimeStylePattern">
       <h1>DateTimeStylePattern ( _dateStyle_, _timeStyle_, _dataLocaleData_ )</h1>
       <p>The DateTimeStylePattern abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"short"` or `"narrow"`, at least one of which is not *undefined*, and _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_. It returns the appropriate pattern for date time formatting based on the parameters.</p>
       <emu-alg>
@@ -150,7 +152,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
       <emu-alg>
         4. Let _this_ be the *this* value.
         1. If NewTarget is *undefined* and ? InstanceofOperator(_this_, %DateTimeFormat%), then
-          1. Perform ? DefineOwnPropertyOrThrow(_this_, Intl.[[FallbackSymbol]], { [[Value]]: _dateTimeFormat_, [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }).
+          1. Perform ? DefinePropertyOrThrow(_this_, Intl.[[FallbackSymbol]], { [[Value]]: _dateTimeFormat_, [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }).
           1. Return _this_.
       </emu-alg>
       </emu-normative-optional>
