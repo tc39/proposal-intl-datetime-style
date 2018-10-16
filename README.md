@@ -10,7 +10,7 @@ Current Stage:
 
 Spec Text:
 
- * https://rawgit.com/zbraniecki/proposal-ecma402-datetime-style/master/out/
+ * https://tc39.github.io/proposal-ecma402-datetime-style/
 
 ### Authors
 
