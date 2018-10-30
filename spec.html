@@ -43,7 +43,24 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. Let _r_ be ResolveLocale( %DateTimeFormat%.[[AvailableLocales]], _requestedLocales_, _opt_, %DateTimeFormat%.[[RelevantExtensionKeys]], _localeData_).
         1. Set _dateTimeFormat_.[[Locale]] to _r_.[[locale]].
         1. Set _dateTimeFormat_.[[Calendar]] to _r_.[[ca]].
-        1. Set _dateTimeFormat_.[[HourCycle]] to _r_.[[hc]].
+        1. <del>Set _dateTimeFormat_.[[HourCycle]] to _r_.[[hc]].</del>
+        1. <ins>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</ins>
+        1. <ins>Let _hc_ be _r_.[[hc]].</ins>
+        1. <ins>If _hc_ is *null*, then</ins>
+          1. <ins>Set _hc_ to _hcDefault_.</ins>
+        1. <ins>If _hour12_ is not *undefined*, then</ins>
+          1. <ins>If _hour12_ is *true*, then</ins>
+            1. <ins>If _hcDefault_ is `"h11"` or `"h23"`, then</ins>
+              1. <ins>Set _hc_ to `"h11"`.</ins>
+            1. <ins>Else,</ins>
+              1. <ins>Set _hc_ to `"h12"`.</ins>
+          1. <ins>Else,</ins>
+            1. <ins>Assert: _hour12_ is *false*.</ins>
+            1. <ins>If _hcDefault_ is `"h11"` or `"h23"`, then</ins>
+              1. <ins>Set _hc_ to `"h23"`.</ins>
+            1. <ins>Else,</ins>
+              1. <ins>Set _hc_ to `"h24"`.</ins>
+        1. <ins>Set _dateTimeFormat_.[[HourCycle]] to _hc_.</ins>
         1. Set _dateTimeFormat_.[[NumberingSystem]] to _r_.[[nu]].
         1. Let _dataLocale_ be _r_.[[dataLocale]].
         1. Let _timeZone_ be ? Get(_options_, `"timeZone"`).
@@ -62,7 +79,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. <ins>Let _timeStyle_ be ? GetOption(_options_, `"timeStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;).</ins>
         1. <ins>If _timeStyle_ is not *undefined*, set _dateTimeFormat_.[[TimeStyle]] to _timeStyle_.</ins>
         1. <ins>If _dateStyle_ or _timeStyle_ are not *undefined*, then</ins>
-          1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_).</ins>
+          1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_, _hourCycle_).</ins>
         1. <ins>Else,</ins>
           1. Let _opt_ be a new Record.
           1. For each row of <emu-xref href="#table-datetimeformat-components"></emu-xref>, except the header row, do
@@ -80,23 +97,23 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
             1. If _p_ not *undefined*, then
               1. Set _dateTimeFormat_'s internal slot whose name is the Internal Slot column of the row to _p_.
           1. If _dateTimeFormat_.[[Hour]] is not *undefined*, then
-            1. Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].
-            1. Let _hc_ be _dateTimeFormat_.[[HourCycle]].
-            1. If _hc_ is *null*, then
-              1. Set _hc_ to _hcDefault_.
-            1. If _hour12_ is not *undefined*, then
-              1. If _hour12_ is *true*, then
-                1. If _hcDefault_ is `"h11"` or `"h23"`, then
-                  1. Set _hc_ to `"h11"`.
-                1. Else,
-                  1. Set _hc_ to `"h12"`.
-              1. Else,
-                1. Assert: _hour12_ is *false*.
-                1. If _hcDefault_ is `"h11"` or `"h23"`, then
-                  1. Set _hc_ to `"h23"`.
-                1. Else,
-                  1. Set _hc_ to `"h24"`.
-            1. Set _dateTimeFormat_.[[HourCycle]] to _hc_.
+            1. <del>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</del>
+            1. <del>Let _hc_ be _dateTimeFormat_.[[HourCycle]].</del>
+            1. <del>If _hc_ is *null*, then</del>
+              1. <del>Set _hc_ to _hcDefault_.</del>
+            1. <del>If _hour12_ is not *undefined*, then</del>
+              1. <del>If _hour12_ is *true*, then</del>
+                1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
+                  1. <del>Set _hc_ to `"h11"`.</del>
+                1. <del>Else,</del>
+                  1. <del>Set _hc_ to `"h12"`.</del>
+              1. <del>Else,</del>
+                1. <del>Assert: _hour12_ is *false*.</del>
+                1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
+                  1. <del>Set _hc_ to `"h23"`.</del>
+                1. <del>Else,</del>
+                  1. <del>Set _hc_ to `"h24"`.</del>
+            1. <del>Set _dateTimeFormat_.[[HourCycle]] to _hc_.</del>
             1. If _dateTimeformat_.[[HourCycle]] is `"h11"` or `"h12"`, then
               1. Let _pattern_ be _bestFormat_.[[pattern12]].
             1. Else,
@@ -109,22 +126,24 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
       </emu-alg>
     </emu-clause>
     <emu-clause id="sec-date-time-style-pattern" aoid="DateTimeStylePattern">
-      <h1>DateTimeStylePattern ( _dateStyle_, _timeStyle_, _dataLocaleData_ )</h1>
-      <p>The DateTimeStylePattern abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"short"` or `"narrow"`, at least one of which is not *undefined*, and _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_. It returns the appropriate pattern for date time formatting based on the parameters.</p>
+      <h1>DateTimeStylePattern ( _dateStyle_, _timeStyle_, _dataLocaleData_, _hourCycle_ )</h1>
+      <p>The DateTimeStylePattern abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"short"` or `"narrow"`, at least one of which is not *undefined*, _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_, and _hourCycle_, which is either `"h11"`, `"h12"`, `"h23"`, or `"h24"`. It returns the appropriate pattern for date time formatting based on the parameters.</p>
       <emu-alg>
-        1. If _dateStyle_ is *undefined*,
+        1. If _timeStyle_ is not *undefined*,
           1. Assert: _timeStyle_ is one of `"full"`, `"long"`, `"short"` or `"narrow"`.
-          1. Return _dataLocaleData_.[[TimeFormat]].[[&lt;_timeStyle_&gt;]].
-        1. If _timeStyle_ is *undefined*,
+          1. Let _timeFormats_ be _dataLocaleData_.[[TimeFormat]].[[&lt;_timeStyle_&gt;]].
+          1. If _hourCycle_ is `"h11"` or `"h12"`, then
+            1. Let _timeFormat_ be _timeFormats_.[[pattern12]].
+          1. Else,
+            1. Let _timeFormat_ be _timeFormats_.[[pattern]].
+        1. If _dateStyle_ is not *undefined*,
           1. Assert: _dateStyle_ is one of `"full"`, `"long"`, `"short"` or `"narrow"`.
-          1. Return _dataLocaleData_.[[DateFormat]].[[&lt;_timeStyle_&gt;]].
-        1. Otherwise,
-          1. Assert: _dateStyle_ is one of `"full"`, `"long"`, `"short"` or `"narrow"`.
-          1. Assert: _timeStyle_ is one of `"full"`, `"long"`, `"short"` or `"narrow"`.
-          1. Let _timePattern_ be _dataLocaleData_.[[TimeFormat]].[[&lt;_timeStyle_&gt;]].
-          1. Let _datePattern_ be _dataLocaleData_.[[DateFormat]].[[&lt;_dateStyle_&gt;]].
+          1. Let _dateFormat_ _dataLocaleData_.[[DateFormat]].[[&lt;_dateStyle_&gt;]].
+        1. If _dateStyle_ is not *undefined* and _timeStyle_ is not *undefined*,
           1. Let _connector_ be _dataLocaleData_.[[DateTimeFormat]].[[&lt;_dateStyle_&gt;]].
           1. Return the string _connector_ with the substring `"{0}"` replaced with _timePattern_ and the substring `"{1}"` replaced with _datePattern_.
+        1. Otherwise, if _timeStyle_ is not *undefined*, return _timeFormat_.
+        1. Otherwise, _dateStyle_ is not *undefined*, so return _dateFormat_.
       </emu-alg>
     </emu-clause>
   </emu-clause>
@@ -208,7 +227,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
           Each of the records must also have a pattern field, whose value is a String value that contains for each of the date and time format component fields of the record a substring starting with `"{"`, followed by the name of the field, followed by `"}"`. If the record has an hour field, it must also have a pattern12 field, whose value is a String value that, in addition to the substrings of the pattern field, contains a substring `"{ampm}"`.
         </li>
         <li>
-          [[LocaleData]][locale] must contain [[DateFormat]], [[TimeFormat]] and [[DateTimeFormat]] fields, each of which has [[full]], [[long]], [[short]] and [[narrow]] fields, containing strings.
+          [[LocaleData]][locale] must contain [[DateFormat]], [[TimeFormat]] and [[DateTimeFormat]] fields, each of which has [[full]], [[long]], [[short]] and [[narrow]] fields. These fields have string pattern values for [[DateFormat]] and [[DateTimeFormat]]; for [[TimeFormat]], they are records with [[pattern]] and [[pattern12]] fields, which are string patterns.
         </li>
       </ul>
 
