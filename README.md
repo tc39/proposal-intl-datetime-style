@@ -10,7 +10,7 @@ Current Stage:
 
 Spec Text:
 
- * https://tc39.github.io/proposal-ecma402-datetime-style/
+ * https://tc39.github.io/proposal-intl-datetime-style/
 
 ### Authors
 
