@@ -6,7 +6,7 @@ This proposal adds two options to `Intl.DateTimeFormat`: `dateStyle` and `timeSt
 
 Current Stage:
 
- * 🚀 __Stage 1__
+ * 🚀 __Stage 2__
 
 Spec Text:
 
