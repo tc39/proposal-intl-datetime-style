@@ -188,26 +188,30 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
       </emu-alg>
     </emu-clause>
     <emu-clause id="sec-date-time-style-pattern" aoid="DateTimeStylePattern">
-      <h1>DateTimeStylePattern ( _dateStyle_, _timeStyle_, _dataLocaleData_, _hourCycle_ )</h1>
-      <p>The DateTimeStylePattern abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"medium"` or `"short"`, at least one of which is not *undefined*, _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_, and _hourCycle_, which is either `"h11"`, `"h12"`, `"h23"`, or `"h24"`. It returns the appropriate pattern for date time formatting based on the parameters.</p>
-      <emu-alg>
-        1. If _timeStyle_ is not *undefined*,
-          1. Assert: _timeStyle_ is one of `"full"`, `"long"`, `"medium"` or `"short"`.
-          1. Let _timeFormats_ be _dataLocaleData_.[[TimeFormat]].[[&lt;_timeStyle_&gt;]].
-          1. If _hourCycle_ is `"h11"` or `"h12"`, then
-            1. Let _timeFormat_ be _timeFormats_.[[pattern12]].
-          1. Else,
-            1. Let _timeFormat_ be _timeFormats_.[[pattern]].
-        1. If _dateStyle_ is not *undefined*,
-          1. Assert: _dateStyle_ is one of `"full"`, `"long"`, `"medium"` or `"short"`.
-          1. Let _dateFormat_ _dataLocaleData_.[[DateFormat]].[[&lt;_dateStyle_&gt;]].
-        1. If _dateStyle_ is not *undefined* and _timeStyle_ is not *undefined*,
-          1. Let _connector_ be _dataLocaleData_.[[DateTimeFormat]].[[&lt;_dateStyle_&gt;]].
-          1. Return the string _connector_ with the substring `"{0}"` replaced with _timePattern_ and the substring `"{1}"` replaced with _datePattern_.
-        1. Otherwise, if _timeStyle_ is not *undefined*, return _timeFormat_.
-        1. Otherwise, _dateStyle_ is not *undefined*, so return _dateFormat_.
-      </emu-alg>
-    </emu-clause>
+      <ins>
+        <h1>DateTimeStylePattern ( _dateStyle_, _timeStyle_, _dataLocaleData_, _hourCycle_ )</h1>
+        <p>The DateTimeStylePattern abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"medium"` or `"short"`, at least one of which is not *undefined*, _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_, and _hourCycle_, which is either `"h11"`, `"h12"`, `"h23"`, or `"h24"`. It returns the appropriate pattern for date time formatting based on the parameters.</p>
+        <emu-alg>
+          1. If _timeStyle_ is not *undefined*,
+            1. Assert: _timeStyle_ is one of `"full"`, `"long"`, `"medium"` or `"short"`.
+            1. Let _timeFormats_ be _dataLocaleData_.[[TimeFormat]].[[&lt;_timeStyle_&gt;]].
+            1. If _hourCycle_ is `"h11"` or `"h12"`, then
+              1. Let _timeFormat_ be _timeFormats_.[[pattern12]].
+            1. Else,
+              1. Let _timeFormat_ be _timeFormats_.[[pattern]].
+          1. If _dateStyle_ is not *undefined*,
+            1. Assert: _dateStyle_ is one of `"full"`, `"long"`, `"medium"` or `"short"`.
+            1. Let _dateFormat_ _dataLocaleData_.[[DateFormat]].[[&lt;_dateStyle_&gt;]].
+          1. If _dateStyle_ is not *undefined* and _timeStyle_ is not *undefined*,
+            1. Let _connector_ be _dataLocaleData_.[[DateTimeFormat]].[[&lt;_dateStyle_&gt;]].
+            1. Return the string _connector_ with the substring `"{0}"` replaced with _timePattern_ and the substring `"{1}"` replaced with _datePattern_.
+          1. If _timeStyle_ is not *undefined*, then
+            1. Return _timeFormat_.
+          1. Assert: _dateStyle_ is not *undefined*.
+          1. Return _dateFormat_.
+        </emu-alg>
+      </emu-clause>
+    </ins>
   </emu-clause>
 
   <emu-clause id="sec-intl-datetimeformat-constructor">
@@ -289,8 +293,10 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
           Each of the records must also have a pattern field, whose value is a String value that contains for each of the date and time format component fields of the record a substring starting with `"{"`, followed by the name of the field, followed by `"}"`. If the record has an hour field, it must also have a pattern12 field, whose value is a String value that, in addition to the substrings of the pattern field, contains a substring `"{ampm}"`.
         </li>
         <li>
-          [[LocaleData]][locale] must contain [[DateFormat]], [[TimeFormat]] and [[DateTimeFormat]] fields, each of which has [[full]], [[long]], [[medium]] and [[short]] fields. These fields have string pattern values for [[DateFormat]] and [[DateTimeFormat]]; for [[TimeFormat]], they are records with [[pattern]] and [[pattern12]] fields, which are string patterns.
-        </li>
+          <ins>
+            [[LocaleData]][locale] must contain [[DateFormat]], [[TimeFormat]] and [[DateTimeFormat]] fields, each of which has [[full]], [[long]], [[medium]] and [[short]] fields. These fields have string pattern values for [[DateFormat]] and [[DateTimeFormat]]; for [[TimeFormat]], they are records with [[pattern]] and [[pattern12]] fields, which are string patterns.
+          </ins>
+         </li>
       </ul>
 
       <p>
@@ -318,7 +324,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. If Type(_dtf_) is not Object, throw a *TypeError* exception.
         1. Let _dtf_ be ? UnwrapDateTimeFormat(_dtf_).
         1. Let _options_ be ! ObjectCreate(%ObjectPrototype%).
-        1. For each row of <emu-xref href="#table-datetimeformat-resolvedoptions-properties"></emu-xref>, except the header row, in any order, do
+        1. For each row of <emu-xref href="#table-datetimeformat-resolvedoptions-properties"></emu-xref>, except the header row, in table order, do
           1. Let _p_ be the Property value of the current row.
           1. If _p_ is `"hour12"`, then
             1. Let _hc_ be _dtf_.[[HourCycle]].
@@ -417,7 +423,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
       </p>
 
       <emu-note>
-        In this version of the ECMAScript 2019 Internationalization API, the timeZone property will be the name of the default time zone if no timeZone property was provided in the options object provided to the Intl.DateTimeFormat constructor. The first edition left the timeZone property *undefined* in this case.
+        In this version of the ECMAScript 2020 Internationalization API, the timeZone property will be the name of the default time zone if no timeZone property was provided in the options object provided to the Intl.DateTimeFormat constructor. The first edition left the timeZone property *undefined* in this case.
       </emu-note>
 
       <emu-note>
@@ -431,7 +437,15 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
     <h1>Properties of Intl.DateTimeFormat Instances</h1>
 
     <p>
-      Objects that have been successfully initialized as a DateTimeFormat also have several internal slots that are computed by the constructor:
+      Intl.DateTimeFormat instances inherit properties from %DateTimeFormatPrototype%.
+    </p>
+
+    <p>
+      Intl.DateTimeFormat instances have an [[InitializedDateTimeFormat]] internal slot.
+    </p>
+
+    <p>
+      Intl.DateTimeFormat instances also have several internal slots that are computed by the constructor:
     </p>
 
     <ul>
