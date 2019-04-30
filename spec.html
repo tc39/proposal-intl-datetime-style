@@ -142,7 +142,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. <ins>Let _timeStyle_ be ? GetOption(_options_, `"timeStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
         1. <ins>If _timeStyle_ is not *undefined*, set _dateTimeFormat_.[[TimeStyle]] to _timeStyle_.</ins>
         1. <ins>If _dateStyle_ or _timeStyle_ are not *undefined*, then</ins>
-          1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_, _hourCycle_).</ins>
+          1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_, _hc_).</ins>
         1. <ins>Else,</ins>
           1. Let _opt_ be a new Record.
           1. For each row of <emu-xref href="#table-datetimeformat-components"></emu-xref>, except the header row, do
