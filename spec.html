@@ -106,6 +106,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. Set _dateTimeFormat_.[[Locale]] to _r_.[[locale]].
         1. Set _dateTimeFormat_.[[Calendar]] to _r_.[[ca]].
         1. <del>Set _dateTimeFormat_.[[HourCycle]] to _r_.[[hc]].</del>
+        1. <ins>Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].</ins>
         1. <ins>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</ins>
         1. <ins>Let _hc_ be _r_.[[hc]].</ins>
         1. <ins>If _hc_ is *null*, then</ins>
@@ -134,7 +135,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. Else,
           1. Let _timeZone_ be DefaultTimeZone().
         1. Set _dateTimeFormat_.[[TimeZone]] to _timeZone_.
-        1. Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].
+        1. <del>Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].</del>
         1. Let _formats_ be _dataLocaleData_.[[formats]].
         1. <ins>Let _dateStyle_ be ? GetOption(_options_, `"dateStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
         1. <ins>If _dateStyle_ is not *undefined*, set _dateTimeFormat_.[[DateStyle]] to _dateStyle_.</ins>
