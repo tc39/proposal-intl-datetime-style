@@ -3,7 +3,7 @@
 set -ev
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
-if [[ "$TRAVIS_BRANCH" != master ]]; then
+if [[ "$TRAVIS_BRANCH" != master || "$TRAVIS_PULL_REQUEST" != false ]]; then
   echo "Skipping deploy; just doing a build."
   npm run build
   exit 0
