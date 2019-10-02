@@ -124,7 +124,6 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
               1. <ins>Set _hc_ to `"h23"`.</ins>
             1. <ins>Else,</ins>
               1. <ins>Set _hc_ to `"h24"`.</ins>
-        1. <ins>Set _dateTimeFormat_.[[HourCycle]] to _hc_.</ins>
         1. Set _dateTimeFormat_.[[NumberingSystem]] to _r_.[[nu]].
         1. <del>Let _dataLocale_ be _r_.[[dataLocale]].</del>
         1. Let _timeZone_ be ? Get(_options_, `"timeZone"`).
@@ -141,7 +140,9 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. <ins>Let _dateStyle_ be ? GetOption(_options_, `"dateStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
         1. <ins>If _dateStyle_ is not *undefined*, set _dateTimeFormat_.[[DateStyle]] to _dateStyle_.</ins>
         1. <ins>Let _timeStyle_ be ? GetOption(_options_, `"timeStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
-        1. <ins>If _timeStyle_ is not *undefined*, set _dateTimeFormat_.[[TimeStyle]] to _timeStyle_.</ins>
+        1. <ins>If _timeStyle_ is not *undefined*, then</ins>
+          1. <ins>Set _dateTimeFormat_.[[TimeStyle]] to _timeStyle_.</ins>
+          1. <ins>Set _dateTimeFormat_.[[HourCycle]] to _hc_.</ins>
         1. <ins>If _dateStyle_ or _timeStyle_ are not *undefined*, then</ins>
           1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_, _hc_).</ins>
         1. <ins>Else,</ins>
@@ -177,7 +178,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
                   1. <del>Set _hc_ to `"h23"`.</del>
                 1. <del>Else,</del>
                   1. <del>Set _hc_ to `"h24"`.</del>
-            1. <del>Set _dateTimeFormat_.[[HourCycle]] to _hc_.</del>
+            1. Set _dateTimeFormat_.[[HourCycle]] to _hc_.
             1. If _dateTimeformat_.[[HourCycle]] is `"h11"` or `"h12"`, then
               1. Let _pattern_ be _bestFormat_.[[pattern12]].
             1. Else,
@@ -454,7 +455,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
       <li>[[NumberingSystem]] is a String value with the `"type"` given in Unicode Technical Standard 35 for the numbering system used for formatting.</li>
       <li>[[TimeZone]] is a String value with the IANA time zone name of the time zone used for formatting.</li>
       <li>[[Weekday]], [[Era]], [[Year]], [[Month]], [[Day]], [[Hour]], [[Minute]], [[Second]], [[TimeZoneName]] are each either *undefined*, indicating that the component is not used for formatting, or one of the String values given in <emu-xref href="#table-datetimeformat-components"></emu-xref>, indicating how the component should be presented in the formatted output.</li>
-      <li>[[HourCycle]] is a String value indicating whether the 12-hour format (`"h11"`, `"h12"`) or the 24-hour format (`"h23"`, `"h24"`) should be used. `"h11"` and `"h23"` start with hour 0 and go up to 11 and 23 respectively. `"h12"` and `"h24"` start with hour 1 and go up to 12 and 24. [[HourCycle]] is only used when [[Hour]] is not *undefined*.</li>
+      <li>[[HourCycle]] is a String value indicating whether the 12-hour format (`"h11"`, `"h12"`) or the 24-hour format (`"h23"`, `"h24"`) should be used. `"h11"` and `"h23"` start with hour 0 and go up to 11 and 23 respectively. `"h12"` and `"h24"` start with hour 1 and go up to 12 and 24. [[HourCycle]] is only used when <del>[[Hour]] is not *undefined*</del><ins>[[Pattern]] includes the hour</ins>.</li>
       <li><ins>[[DateStyle]], [[TimeStyle]] are each either *undefined*, or a String value with values `"full"`, `"long"`, `"medium"`, or `"short"`.</ins></li>
       <li>[[Pattern]] is a String value as described in <emu-xref href="#sec-intl.datetimeformat-internal-slots"></emu-xref>.</li>
     </ul>
