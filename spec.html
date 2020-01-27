@@ -146,7 +146,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
           1. <ins>Set _dateTimeFormat_.[[TimeStyle]] to _timeStyle_.</ins>
           1. <ins>Set _dateTimeFormat_.[[HourCycle]] to _hc_.</ins>
         1. <ins>If _dateStyle_ or _timeStyle_ are not *undefined*, then</ins>
-          1. <ins>If any of the Properties from <emu-xref href="#table-datetimeformat-components"></emu-xref> except of `hourCycle`, is defined in _options_,</ins>
+          1. <ins>If any of the Properties from <emu-xref href="#table-datetimeformat-components"></emu-xref>, not including `hourCycle`, is defined in _options_,</ins>
             1. <ins>Throw a *RangeError* exception.</ins>
           1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_, _hc_).</ins>
         1. <ins>Else,</ins>
