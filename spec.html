@@ -138,10 +138,10 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. <del>Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].</del>
         1. Let _formats_ be _dataLocaleData_.[[formats]].
         1. <ins>Let _dateStyle_ be ? GetOption(_options_, `"dateStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
-        1. <ins>If _dateStyle_ is not *undefined*, set _dateTimeFormat_.[[DateStyle]] to _dateStyle_.</ins>
+        1. <ins>Set _dateTimeFormat_.[[DateStyle]] to _dateStyle_.</ins>
         1. <ins>Let _timeStyle_ be ? GetOption(_options_, `"timeStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
+        1. <ins>Set _dateTimeFormat_.[[TimeStyle]] to _timeStyle_.</ins>
         1. <ins>If _timeStyle_ is not *undefined*, then</ins>
-          1. <ins>Set _dateTimeFormat_.[[TimeStyle]] to _timeStyle_.</ins>
           1. <ins>Set _dateTimeFormat_.[[HourCycle]] to _hc_.</ins>
         1. <ins>If _dateStyle_ or _timeStyle_ are not *undefined*, then</ins>
           1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_, _hc_).</ins>
