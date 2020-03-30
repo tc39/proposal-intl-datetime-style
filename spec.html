@@ -194,17 +194,17 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
       <h1><ins>DateTimeStylePattern ( _dateStyle_, _timeStyle_, _dataLocaleData_, _hourCycle_ )</ins></h1>
       <p>The DateTimeStylePattern abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"medium"`, or `"short"`, at least one of which is not *undefined*, _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_, and _hourCycle_, which is either `"h11"`, `"h12"`, `"h23"`, or `"h24"`. It returns the appropriate pattern for date time formatting based on the parameters.</p>
       <emu-alg>
-        1. If _timeStyle_ is not *undefined*,
+        1. If _timeStyle_ is not *undefined*, then
           1. Assert: _timeStyle_ is one of `"full"`, `"long"`, `"medium"`, or `"short"`.
           1. Let _timeFormats_ be _dataLocaleData_.[[TimeFormat]].[[&lt;_timeStyle_&gt;]].
           1. If _hourCycle_ is `"h11"` or `"h12"`, then
             1. Let _timeFormat_ be _timeFormats_.[[pattern12]].
           1. Else,
             1. Let _timeFormat_ be _timeFormats_.[[pattern]].
-        1. If _dateStyle_ is not *undefined*,
+        1. If _dateStyle_ is not *undefined*, then
           1. Assert: _dateStyle_ is one of `"full"`, `"long"`, `"medium"`, or `"short"`.
           1. Let _dateFormat_ be _dataLocaleData_.[[DateFormat]].[[&lt;_dateStyle_&gt;]].
-        1. If _dateStyle_ is not *undefined* and _timeStyle_ is not *undefined*,
+        1. If _dateStyle_ is not *undefined* and _timeStyle_ is not *undefined*, then
           1. Let _connector_ be _dataLocaleData_.[[DateTimeFormat]].[[&lt;_dateStyle_&gt;]].
           1. Return the string _connector_ with the substring `"{0}"` replaced with _timeFormat_ and the substring `"{1}"` replaced with _dateFormat_.
         1. If _timeStyle_ is not *undefined*, then
