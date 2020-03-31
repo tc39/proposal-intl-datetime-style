@@ -190,6 +190,41 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. Return _dateTimeFormat_.
       </emu-alg>
     </emu-clause>
+
+    <emu-clause id="sec-todatetimeoptions" aoid="ToDateTimeOptions">
+      <h1>ToDateTimeOptions ( _options_, _required_, _defaults_ )</h1>
+
+      <p>
+        When the ToDateTimeOptions abstract operation is called with arguments _options_, _required_, and _defaults_, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. If _options_ is *undefined*, let _options_ be *null*; otherwise let _options_ be ? ToObject(_options_).
+        1. Let _options_ be ObjectCreate(_options_).
+        1. Let _needDefaults_ be *true*.
+        1. If _required_ is *"date"* or *"any"*, then
+          1. For each of the property names *"weekday"*, *"year"*, *"month"*, *"day"*, do
+            1. Let _prop_ be the property name.
+            1. Let _value_ be ? Get(_options_, _prop_).
+            1. If _value_ is not *undefined*, let _needDefaults_ be *false*.
+        1. If _required_ is *"time"* or *"any"*, then
+          1. For each of the property names *"hour"*, *"minute"*, *"second"*, do
+            1. Let _prop_ be the property name.
+            1. Let _value_ be ? Get(_options_, _prop_).
+            1. If _value_ is not *undefined*, let _needDefaults_ be *false*.
+        1. <ins>Let _dateStyle_ be ? Get(_options_, *"dateStyle"*).</ins>
+        1. <ins>Let _timeStyle_ be ? Get(_options_, *"timeStyle"*).</ins>
+        1. <ins>If _dateStyle_ is not *undefined* or _timeStyle_ is not *undefined*, let _needDefaults_ be *false*.</ins>
+        1. If _needDefaults_ is *true* and _defaults_ is either *"date"* or *"all"*, then
+          1. For each of the property names *"year"*, *"month"*, *"day"*, do
+            1. Perform ? CreateDataPropertyOrThrow(_options_, _prop_, *"numeric"*).
+        1. If _needDefaults_ is *true* and _defaults_ is either *"time"* or *"all"*, then
+          1. For each of the property names *"hour"*, *"minute"*, *"second"*, do
+            1. Perform ? CreateDataPropertyOrThrow(_options_, _prop_, *"numeric"*).
+        1. Return _options_.
+      </emu-alg>
+    </emu-clause>
+
     <emu-clause id="sec-date-time-style-pattern" aoid="DateTimeStylePattern">
       <h1><ins>DateTimeStylePattern ( _dateStyle_, _timeStyle_, _dataLocaleData_, _hourCycle_ )</ins></h1>
       <p>The DateTimeStylePattern abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"medium"`, or `"short"`, at least one of which is not *undefined*, _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_, and _hourCycle_, which is either `"h11"`, `"h12"`, `"h23"`, or `"h24"`. It returns the appropriate pattern for date time formatting based on the parameters.</p>
