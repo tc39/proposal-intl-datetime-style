@@ -1,6 +1,12 @@
 {
   "https://tc39.github.io/ecma402/": [
     {
+      "type": "clause",
+      "title": "Internal slots of Service Constructors",
+      "number": "9.1",
+      "id": "sec-internal-slots"
+    },
+    {
       "type": "op",
       "aoid": "BasicFormatMatcher",
       "id": "sec-basicformatmatcher"

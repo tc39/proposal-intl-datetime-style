@@ -11,7 +11,7 @@
     "build": "[ -d out ] || mkdir out && ecmarkup spec.html out/index.html"
   },
   "dependencies": {
-    "ecmarkup": "^3.12.0"
+    "ecmarkup": "^3.19.0"
   },
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.0"
