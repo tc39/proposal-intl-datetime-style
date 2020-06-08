@@ -221,6 +221,10 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. <ins>Let _dateStyle_ be ? Get(_options_, *"dateStyle"*).</ins>
         1. <ins>Let _timeStyle_ be ? Get(_options_, *"timeStyle"*).</ins>
         1. <ins>If _dateStyle_ is not *undefined* or _timeStyle_ is not *undefined*, let _needDefaults_ be *false*.</ins>
+        1. <ins>If _required_ is *"date"* and _timeStyle_ is not *undefined*,</ins>
+          1. <ins>Throw a *RangeError* exception.</ins>
+        1. <ins>If _required_ is *"time"* and _dateStyle is not *undefined*,</ins>
+          1. <ins>Throw a *RangeError* exception.</ins>
         1. If _needDefaults_ is *true* and _defaults_ is either *"date"* or *"all"*, then
           1. For each of the property names *"year"*, *"month"*, *"day"*, do
             1. Perform ? CreateDataPropertyOrThrow(_options_, _prop_, *"numeric"*).
