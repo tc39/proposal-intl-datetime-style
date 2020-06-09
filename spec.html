@@ -155,55 +155,43 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
             1. <ins>Let _p_ be _opt_.[[&lt;_prop_&gt;]].</ins>
             1. <ins>If _p_ is not *undefined*, then</ins>
               1. <ins>Throw a *TypeError* exception.</ins>
-          1. <ins>Let _format_ be DateTimeStyleFormat(_dateStyle_, _timeStyle_, _dataLocaleData_).</ins>
-          1. <ins>For each row in <emu-xref href="#table-datetimeformat-components"></emu-xref>, except the header row, do</ins>
-            1. <ins>Let _prop_ be the name given in the Property column of the row.</ins>
-            1. <ins>Let _p_ be _format_.[[&lt;_prop_&gt;]].</ins>
-            1. <ins>If _p_ not *undefined*, then</ins>
-              1. <ins>Set _dateTimeFormat_'s internal slot whose name is the Internal Slot column of the row to _p_.</ins>
-          1. <ins>If _dateTimeformat_.[[HourCycle]] is `"h11"` or `"h12"`, then</ins>
-              1. <ins>Let _pattern_ be _format_.[[pattern12]].</ins>
-            1. <ins>Else,</ins>
-              1. <ins>Let _pattern_ be _format_.[[pattern]].</ins>
-          1. <ins>Else,</ins>
-            1. <ins>Set _dateTimeFormat_.[[HourCycle]] to *undefined*.</ins>
-            1. <ins>Let _pattern_ be _format_.[[pattern]].</ins>
+          1. <ins>Let _bestFormat_ be DateTimeStyleFormat(_dateStyle_, _timeStyle_, _dataLocaleData_).</ins>
         1. <ins>Else,</ins>
           1. Let _formats_ be _dataLocaleData_.[[formats]].
           1. If _matcher_ is `"basic"`, then
             1. Let _bestFormat_ be BasicFormatMatcher(_opt_, _formats_).
           1. Else,
             1. Let _bestFormat_ be BestFitFormatMatcher(_opt_, _formats_).
-          1. For each row in <emu-xref href="#table-datetimeformat-components"></emu-xref>, except the header row, do
-            1. Let _prop_ be the name given in the Property column of the row.
-            1. Let _p_ be _bestFormat_.[[&lt;_prop_&gt;]].
-            1. If _p_ not *undefined*, then
-              1. Set _dateTimeFormat_'s internal slot whose name is the Internal Slot column of the row to _p_.
-          1. If _dateTimeFormat_.[[Hour]] is not *undefined*, then
-            1. <del>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</del>
-            1. <del>Let _hc_ be _dateTimeFormat_.[[HourCycle]].</del>
-            1. <del>If _hc_ is *null*, then</del>
-              1. <del>Set _hc_ to _hcDefault_.</del>
-            1. <del>If _hour12_ is not *undefined*, then</del>
-              1. <del>If _hour12_ is *true*, then</del>
-                1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
-                  1. <del>Set _hc_ to `"h11"`.</del>
-                1. <del>Else,</del>
-                  1. <del>Set _hc_ to `"h12"`.</del>
+        1. For each row in <emu-xref href="#table-datetimeformat-components"></emu-xref>, except the header row, do
+          1. Let _prop_ be the name given in the Property column of the row.
+          1. Let _p_ be _bestFormat_.[[&lt;_prop_&gt;]].
+          1. If _p_ not *undefined*, then
+            1. Set _dateTimeFormat_'s internal slot whose name is the Internal Slot column of the row to _p_.
+        1. If _dateTimeFormat_.[[Hour]] is not *undefined*, then
+          1. <del>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</del>
+          1. <del>Let _hc_ be _dateTimeFormat_.[[HourCycle]].</del>
+          1. <del>If _hc_ is *null*, then</del>
+            1. <del>Set _hc_ to _hcDefault_.</del>
+          1. <del>If _hour12_ is not *undefined*, then</del>
+            1. <del>If _hour12_ is *true*, then</del>
+              1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
+                1. <del>Set _hc_ to `"h11"`.</del>
               1. <del>Else,</del>
-                1. <del>Assert: _hour12_ is *false*.</del>
-                1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
-                  1. <del>Set _hc_ to `"h23"`.</del>
-                1. <del>Else,</del>
-                  1. <del>Set _hc_ to `"h24"`.</del>
-            1. Set _dateTimeFormat_.[[HourCycle]] to _hc_.
-            1. If _dateTimeformat_.[[HourCycle]] is `"h11"` or `"h12"`, then
-              1. Let _pattern_ be _bestFormat_.[[pattern12]].
-            1. Else,
-              1. Let _pattern_ be _bestFormat_.[[pattern]].
+                1. <del>Set _hc_ to `"h12"`.</del>
+            1. <del>Else,</del>
+              1. <del>Assert: _hour12_ is *false*.</del>
+              1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
+                1. <del>Set _hc_ to `"h23"`.</del>
+              1. <del>Else,</del>
+                1. <del>Set _hc_ to `"h24"`.</del>
+          1. Set _dateTimeFormat_.[[HourCycle]] to _hc_.
+          1. If _dateTimeformat_.[[HourCycle]] is `"h11"` or `"h12"`, then
+            1. Let _pattern_ be _bestFormat_.[[pattern12]].
           1. Else,
-            1. Set _dateTimeFormat_.[[HourCycle]] to *undefined*.
             1. Let _pattern_ be _bestFormat_.[[pattern]].
+        1. Else,
+          1. Set _dateTimeFormat_.[[HourCycle]] to *undefined*.
+          1. Let _pattern_ be _bestFormat_.[[pattern]].
         1. Set _dateTimeFormat_.[[Pattern]] to _pattern_.
         1. Return _dateTimeFormat_.
       </emu-alg>
