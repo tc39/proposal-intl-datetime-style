@@ -105,27 +105,9 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. Let _r_ be ResolveLocale( %DateTimeFormat%.[[AvailableLocales]], _requestedLocales_, _opt_, %DateTimeFormat%.[[RelevantExtensionKeys]], _localeData_).
         1. Set _dateTimeFormat_.[[Locale]] to _r_.[[locale]].
         1. Set _dateTimeFormat_.[[Calendar]] to _r_.[[ca]].
-        1. <del>Set _dateTimeFormat_.[[HourCycle]] to _r_.[[hc]].</del>
-        1. <ins>Let _dataLocale_ be _r_.[[dataLocale]].</ins>
-        1. <ins>Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].</ins>
-        1. <ins>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</ins>
-        1. <ins>Let _hc_ be _r_.[[hc]].</ins>
-        1. <ins>If _hc_ is *null*, then</ins>
-          1. <ins>Set _hc_ to _hcDefault_.</ins>
-        1. <ins>If _hour12_ is not *undefined*, then</ins>
-          1. <ins>If _hour12_ is *true*, then</ins>
-            1. <ins>If _hcDefault_ is `"h11"` or `"h23"`, then</ins>
-              1. <ins>Set _hc_ to `"h11"`.</ins>
-            1. <ins>Else,</ins>
-              1. <ins>Set _hc_ to `"h12"`.</ins>
-          1. <ins>Else,</ins>
-            1. <ins>Assert: _hour12_ is *false*.</ins>
-            1. <ins>If _hcDefault_ is `"h11"` or `"h23"`, then</ins>
-              1. <ins>Set _hc_ to `"h23"`.</ins>
-            1. <ins>Else,</ins>
-              1. <ins>Set _hc_ to `"h24"`.</ins>
+        1. Set _dateTimeFormat_.[[HourCycle]] to _r_.[[hc]].
         1. Set _dateTimeFormat_.[[NumberingSystem]] to _r_.[[nu]].
-        1. <del>Let _dataLocale_ be _r_.[[dataLocale]].</del>
+        1. Let _dataLocale_ be _r_.[[dataLocale]].
         1. Let _timeZone_ be ? Get(_options_, `"timeZone"`).
         1. If _timeZone_ is not *undefined*, then
           1. Let _timeZone_ be ? ToString(_timeZone_).
@@ -141,7 +123,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
           1. Let _value_ be ? GetOption(_options_, _prop_, `"string"`, &laquo; the strings given in the Values column of the row &raquo;, *undefined*).
           1. Set _opt_.[[&lt;_prop_&gt;]] to _value_.
         1. Let _matcher_ be ? GetOption(_options_, `"formatMatcher"`, `"string"`, &laquo; `"basic"`, `"best fit"` &raquo;, `"best fit"`).
-        1. <del>Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].</del>
+        1. Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].
         1. <del>Let _formats_ be _dataLocaleData_.[[formats]].</del>
         1. <ins>Let _dateStyle_ be ? GetOption(_options_, `"dateStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
         1. <ins>Set _dateTimeFormat_.[[DateStyle]] to _dateStyle_.</ins>
@@ -166,22 +148,22 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
           1. If _p_ not *undefined*, then
             1. Set _dateTimeFormat_'s internal slot whose name is the Internal Slot column of the row to _p_.
         1. If _dateTimeFormat_.[[Hour]] is not *undefined*, then
-          1. <del>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</del>
-          1. <del>Let _hc_ be _dateTimeFormat_.[[HourCycle]].</del>
-          1. <del>If _hc_ is *null*, then</del>
-            1. <del>Set _hc_ to _hcDefault_.</del>
-          1. <del>If _hour12_ is not *undefined*, then</del>
-            1. <del>If _hour12_ is *true*, then</del>
-              1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
-                1. <del>Set _hc_ to `"h11"`.</del>
-              1. <del>Else,</del>
-                1. <del>Set _hc_ to `"h12"`.</del>
-            1. <del>Else,</del>
-              1. <del>Assert: _hour12_ is *false*.</del>
-              1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
-                1. <del>Set _hc_ to `"h23"`.</del>
-              1. <del>Else,</del>
-                1. <del>Set _hc_ to `"h24"`.</del>
+          1. Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].
+          1. Let _hc_ be _dateTimeFormat_.[[HourCycle]].
+          1. If _hc_ is *null*, then
+            1. Set _hc_ to _hcDefault_.
+          1. If _hour12_ is not *undefined*, then
+            1. If _hour12_ is *true*, then
+              1. If _hcDefault_ is `"h11"` or `"h23"`, then
+                1. Set _hc_ to `"h11"`.
+              1. Else,
+                1. Set _hc_ to `"h12"`.
+            1. Else,
+              1. Assert: _hour12_ is *false*.
+              1. If _hcDefault_ is `"h11"` or `"h23"`, then
+                1. Set _hc_ to `"h23"`.
+              1. Else,
+                1. Set _hc_ to `"h24"`.
           1. Set _dateTimeFormat_.[[HourCycle]] to _hc_.
           1. If _dateTimeformat_.[[HourCycle]] is `"h11"` or `"h12"`, then
             1. Let _pattern_ be _bestFormat_.[[pattern12]].
