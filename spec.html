@@ -340,7 +340,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         </li>
         <li>
           <ins>
-            [[LocaleData]][locale] must contain [[DateFormat]], [[TimeFormat]] and [[DateTimeFormat]] fields, the value of these fields are Records, where each of which has [[full]], [[long]], [[medium]] and [[short]] fields. These fields have string pattern values for [[DateFormat]] and [[DateTimeFormat]]; for [[TimeFormat]], they are records with [[pattern]] and [[pattern12]] fields, which are string patterns. For [[DateTimeFormat]], the field values must contain the strings `"{0}"` and `"{1}"`.
+            [[LocaleData]][locale] must contain [[DateFormat]], [[TimeFormat]] and [[DateTimeFormat]] fields, the value of these fields are Records, where each of which has [[full]], [[long]], [[medium]] and [[short]] fields. For [[DateFormat]] and [[TimeFormat]], the value of these fields must be a record, which has a subset of the fields shown in Table 1, where each field must have one of the values specified for the field in Table 1. Each of the records must also have a pattern field, whose value is a String value that contains for each of the date and time format component fields of the record a substring starting with `"{"`, followed by the name of the field, followed by `"}"`. If the record has an hour field, it must also have a pattern12 field, whose value is a String value that, in addition to the substrings of the pattern field, contains a substring `"{ampm}"`. For [[DateTimeFormat]], the field value must be a string pattern which contains the strings `"{0}"` and `"{1}"`.
           </ins>
          </li>
       </ul>
