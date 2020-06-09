@@ -154,7 +154,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
             1. <ins>Let _prop_ be the name given in the Property column of the row.</ins>
             1. <ins>Let _p_ be _opt_.[[&lt;_prop_&gt;]].</ins>
             1. <ins>If _p_ is not *undefined*, then</ins>
-              1. <ins>Throw a *RangeError* exception.</ins>
+              1. <ins>Throw a *TypeError* exception.</ins>
           1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_, _hc_).</ins>
         1. <ins>Else,</ins>
           1. Let _formats_ be _dataLocaleData_.[[formats]].
@@ -222,9 +222,9 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. <ins>Let _timeStyle_ be ? Get(_options_, *"timeStyle"*).</ins>
         1. <ins>If _dateStyle_ is not *undefined* or _timeStyle_ is not *undefined*, let _needDefaults_ be *false*.</ins>
         1. <ins>If _required_ is *"date"* and _timeStyle_ is not *undefined*,</ins>
-          1. <ins>Throw a *RangeError* exception.</ins>
+          1. <ins>Throw a *TypeError* exception.</ins>
         1. <ins>If _required_ is *"time"* and _dateStyle is not *undefined*,</ins>
-          1. <ins>Throw a *RangeError* exception.</ins>
+          1. <ins>Throw a *TypeError* exception.</ins>
         1. If _needDefaults_ is *true* and _defaults_ is either *"date"* or *"all"*, then
           1. For each of the property names *"year"*, *"month"*, *"day"*, do
             1. Perform ? CreateDataPropertyOrThrow(_options_, _prop_, *"numeric"*).
