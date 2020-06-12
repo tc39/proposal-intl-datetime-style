@@ -105,27 +105,9 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         1. Let _r_ be ResolveLocale( %DateTimeFormat%.[[AvailableLocales]], _requestedLocales_, _opt_, %DateTimeFormat%.[[RelevantExtensionKeys]], _localeData_).
         1. Set _dateTimeFormat_.[[Locale]] to _r_.[[locale]].
         1. Set _dateTimeFormat_.[[Calendar]] to _r_.[[ca]].
-        1. <del>Set _dateTimeFormat_.[[HourCycle]] to _r_.[[hc]].</del>
-        1. <ins>Let _dataLocale_ be _r_.[[dataLocale]].</ins>
-        1. <ins>Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].</ins>
-        1. <ins>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</ins>
-        1. <ins>Let _hc_ be _r_.[[hc]].</ins>
-        1. <ins>If _hc_ is *null*, then</ins>
-          1. <ins>Set _hc_ to _hcDefault_.</ins>
-        1. <ins>If _hour12_ is not *undefined*, then</ins>
-          1. <ins>If _hour12_ is *true*, then</ins>
-            1. <ins>If _hcDefault_ is `"h11"` or `"h23"`, then</ins>
-              1. <ins>Set _hc_ to `"h11"`.</ins>
-            1. <ins>Else,</ins>
-              1. <ins>Set _hc_ to `"h12"`.</ins>
-          1. <ins>Else,</ins>
-            1. <ins>Assert: _hour12_ is *false*.</ins>
-            1. <ins>If _hcDefault_ is `"h11"` or `"h23"`, then</ins>
-              1. <ins>Set _hc_ to `"h23"`.</ins>
-            1. <ins>Else,</ins>
-              1. <ins>Set _hc_ to `"h24"`.</ins>
+        1. Set _dateTimeFormat_.[[HourCycle]] to _r_.[[hc]].
         1. Set _dateTimeFormat_.[[NumberingSystem]] to _r_.[[nu]].
-        1. <del>Let _dataLocale_ be _r_.[[dataLocale]].</del>
+        1. Let _dataLocale_ be _r_.[[dataLocale]].
         1. Let _timeZone_ be ? Get(_options_, `"timeZone"`).
         1. If _timeZone_ is not *undefined*, then
           1. Let _timeZone_ be ? ToString(_timeZone_).
@@ -141,57 +123,55 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
           1. Let _value_ be ? GetOption(_options_, _prop_, `"string"`, &laquo; the strings given in the Values column of the row &raquo;, *undefined*).
           1. Set _opt_.[[&lt;_prop_&gt;]] to _value_.
         1. Let _matcher_ be ? GetOption(_options_, `"formatMatcher"`, `"string"`, &laquo; `"basic"`, `"best fit"` &raquo;, `"best fit"`).
-        1. <del>Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].</del>
+        1. Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].
         1. <del>Let _formats_ be _dataLocaleData_.[[formats]].</del>
         1. <ins>Let _dateStyle_ be ? GetOption(_options_, `"dateStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
         1. <ins>Set _dateTimeFormat_.[[DateStyle]] to _dateStyle_.</ins>
         1. <ins>Let _timeStyle_ be ? GetOption(_options_, `"timeStyle"`, `"string"`, &laquo; `"full"`, `"long"`, `"medium"`, `"short"` &raquo;, *undefined*).</ins>
         1. <ins>Set _dateTimeFormat_.[[TimeStyle]] to _timeStyle_.</ins>
-        1. <ins>If _timeStyle_ is not *undefined*, then</ins>
-          1. <ins>Set _dateTimeFormat_.[[HourCycle]] to _hc_.</ins>
         1. <ins>If _dateStyle_ is not *undefined* or _timeStyle_ is not *undefined*, then</ins>
           1. <ins>For each row in <emu-xref href="#table-datetimeformat-components"></emu-xref>, except the header row, do</ins>
             1. <ins>Let _prop_ be the name given in the Property column of the row.</ins>
             1. <ins>Let _p_ be _opt_.[[&lt;_prop_&gt;]].</ins>
             1. <ins>If _p_ is not *undefined*, then</ins>
               1. <ins>Throw a *TypeError* exception.</ins>
-          1. <ins>Let _pattern_ be DateTimeStylePattern(_dateStyle_, _timeStyle_, _dataLocaleData_, _hc_).</ins>
+          1. <ins>Let _bestFormat_ be DateTimeStyleFormat(_dateStyle_, _timeStyle_, _dataLocaleData_).</ins>
         1. <ins>Else,</ins>
           1. Let _formats_ be _dataLocaleData_.[[formats]].
           1. If _matcher_ is `"basic"`, then
             1. Let _bestFormat_ be BasicFormatMatcher(_opt_, _formats_).
           1. Else,
             1. Let _bestFormat_ be BestFitFormatMatcher(_opt_, _formats_).
-          1. For each row in <emu-xref href="#table-datetimeformat-components"></emu-xref>, except the header row, do
-            1. Let _prop_ be the name given in the Property column of the row.
-            1. Let _p_ be _bestFormat_.[[&lt;_prop_&gt;]].
-            1. If _p_ not *undefined*, then
-              1. Set _dateTimeFormat_'s internal slot whose name is the Internal Slot column of the row to _p_.
-          1. If _dateTimeFormat_.[[Hour]] is not *undefined*, then
-            1. <del>Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].</del>
-            1. <del>Let _hc_ be _dateTimeFormat_.[[HourCycle]].</del>
-            1. <del>If _hc_ is *null*, then</del>
-              1. <del>Set _hc_ to _hcDefault_.</del>
-            1. <del>If _hour12_ is not *undefined*, then</del>
-              1. <del>If _hour12_ is *true*, then</del>
-                1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
-                  1. <del>Set _hc_ to `"h11"`.</del>
-                1. <del>Else,</del>
-                  1. <del>Set _hc_ to `"h12"`.</del>
-              1. <del>Else,</del>
-                1. <del>Assert: _hour12_ is *false*.</del>
-                1. <del>If _hcDefault_ is `"h11"` or `"h23"`, then</del>
-                  1. <del>Set _hc_ to `"h23"`.</del>
-                1. <del>Else,</del>
-                  1. <del>Set _hc_ to `"h24"`.</del>
-            1. Set _dateTimeFormat_.[[HourCycle]] to _hc_.
-            1. If _dateTimeformat_.[[HourCycle]] is `"h11"` or `"h12"`, then
-              1. Let _pattern_ be _bestFormat_.[[pattern12]].
+        1. For each row in <emu-xref href="#table-datetimeformat-components"></emu-xref>, except the header row, do
+          1. Let _prop_ be the name given in the Property column of the row.
+          1. Let _p_ be _bestFormat_.[[&lt;_prop_&gt;]].
+          1. If _p_ not *undefined*, then
+            1. Set _dateTimeFormat_'s internal slot whose name is the Internal Slot column of the row to _p_.
+        1. If _dateTimeFormat_.[[Hour]] is not *undefined*, then
+          1. Let _hcDefault_ be _dataLocaleData_.[[hourCycle]].
+          1. Let _hc_ be _dateTimeFormat_.[[HourCycle]].
+          1. If _hc_ is *null*, then
+            1. Set _hc_ to _hcDefault_.
+          1. If _hour12_ is not *undefined*, then
+            1. If _hour12_ is *true*, then
+              1. If _hcDefault_ is `"h11"` or `"h23"`, then
+                1. Set _hc_ to `"h11"`.
+              1. Else,
+                1. Set _hc_ to `"h12"`.
             1. Else,
-              1. Let _pattern_ be _bestFormat_.[[pattern]].
+              1. Assert: _hour12_ is *false*.
+              1. If _hcDefault_ is `"h11"` or `"h23"`, then
+                1. Set _hc_ to `"h23"`.
+              1. Else,
+                1. Set _hc_ to `"h24"`.
+          1. Set _dateTimeFormat_.[[HourCycle]] to _hc_.
+          1. If _dateTimeformat_.[[HourCycle]] is `"h11"` or `"h12"`, then
+            1. Let _pattern_ be _bestFormat_.[[pattern12]].
           1. Else,
-            1. Set _dateTimeFormat_.[[HourCycle]] to *undefined*.
             1. Let _pattern_ be _bestFormat_.[[pattern]].
+        1. Else,
+          1. Set _dateTimeFormat_.[[HourCycle]] to *undefined*.
+          1. Let _pattern_ be _bestFormat_.[[pattern]].
         1. Set _dateTimeFormat_.[[Pattern]] to _pattern_.
         1. Return _dateTimeFormat_.
       </emu-alg>
@@ -235,23 +215,27 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-date-time-style-pattern" aoid="DateTimeStylePattern">
-      <h1><ins>DateTimeStylePattern ( _dateStyle_, _timeStyle_, _dataLocaleData_, _hourCycle_ )</ins></h1>
-      <p>The DateTimeStylePattern abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"medium"`, or `"short"`, at least one of which is not *undefined*, _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_, and _hourCycle_, which is either `"h11"`, `"h12"`, `"h23"`, or `"h24"`. It returns the appropriate pattern for date time formatting based on the parameters.</p>
+    <emu-clause id="sec-date-time-style-format" aoid="DateTimeStyleFormat">
+      <h1><ins>DateTimeStyleFormat ( _dateStyle_, _timeStyle_, _dataLocaleData_ )</ins></h1>
+      <p>The DateTimeStyleFormat abstract operation accepts arguments _dateStyle_ and _timeStyle_, which are each either *undefined*, `"full"`, `"long"`, `"medium"`, or `"short"`, at least one of which is not *undefined*, and _dataLocaleData_, which is a record from %DateTimeFormat%.[[LocaleData]][_locale_] for some locale _locale_. It returns the appropriate format record for date time formatting based on the parameters.</p>
       <emu-alg>
         1. If _timeStyle_ is not *undefined*, then
           1. Assert: _timeStyle_ is one of `"full"`, `"long"`, `"medium"`, or `"short"`.
-          1. Let _timeFormats_ be _dataLocaleData_.[[TimeFormat]].[[&lt;_timeStyle_&gt;]].
-          1. If _hourCycle_ is `"h11"` or `"h12"`, then
-            1. Let _timeFormat_ be _timeFormats_.[[pattern12]].
-          1. Else,
-            1. Let _timeFormat_ be _timeFormats_.[[pattern]].
+          1. Let _timeFormat_ be _dataLocaleData_.[[TimeFormat]].[[&lt;_timeStyle_&gt;]].
         1. If _dateStyle_ is not *undefined*, then
           1. Assert: _dateStyle_ is one of `"full"`, `"long"`, `"medium"`, or `"short"`.
           1. Let _dateFormat_ be _dataLocaleData_.[[DateFormat]].[[&lt;_dateStyle_&gt;]].
         1. If _dateStyle_ is not *undefined* and _timeStyle_ is not *undefined*, then
+          1. Let _format_ be a new Record.
+          1. Add to _format_ all fields from _dateFormat_ except [[pattern]].
+          1. Add to _format_ all fields from _timeFormat_ except [[pattern]] and [[pattern12]], if present.
           1. Let _connector_ be _dataLocaleData_.[[DateTimeFormat]].[[&lt;_dateStyle_&gt;]].
-          1. Return the string _connector_ with the substring `"{0}"` replaced with _timeFormat_ and the substring `"{1}"` replaced with _dateFormat_.
+          1. Let _pattern_ be the string _connector_ with the substring `"{0}"` replaced with _timeFormat_.[[pattern]] and the substring `"{1}"` replaced with _dateFormat_.[[pattern]].
+          1. Set _format_.[[pattern]] to _pattern_.
+          1. If _timeFormat_ has a [[pattern12]] field, then
+            1. Let _pattern12_ be the string _connector_ with the substring `"{0}"` replaced with _timeFormat_.[[pattern12]] and the substring `"{1}"` replaced with _dateFormat_.[[pattern]].
+            1. Set _format_.[[pattern12]] to _pattern12_.
+          1. Return _format_.
         1. If _timeStyle_ is not *undefined*, then
           1. Return _timeFormat_.
         1. Assert: _dateStyle_ is not *undefined*.
@@ -340,7 +324,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
         </li>
         <li>
           <ins>
-            [[LocaleData]][locale] must contain [[DateFormat]], [[TimeFormat]] and [[DateTimeFormat]] fields, the value of these fields are Records, where each of which has [[full]], [[long]], [[medium]] and [[short]] fields. These fields have string pattern values for [[DateFormat]] and [[DateTimeFormat]]; for [[TimeFormat]], they are records with [[pattern]] and [[pattern12]] fields, which are string patterns. For [[DateTimeFormat]], the field values must contain the strings `"{0}"` and `"{1}"`.
+            [[LocaleData]][locale] must contain [[DateFormat]], [[TimeFormat]] and [[DateTimeFormat]] fields, the value of these fields are Records, where each of which has [[full]], [[long]], [[medium]] and [[short]] fields. For [[DateFormat]] and [[TimeFormat]], the value of these fields must be a record, which has a subset of the fields shown in Table 1, where each field must have one of the values specified for the field in Table 1. Each of the records must also have a pattern field, whose value is a String value that contains for each of the date and time format component fields of the record a substring starting with `"{"`, followed by the name of the field, followed by `"}"`. If the record has an hour field, it must also have a pattern12 field, whose value is a String value that, in addition to the substrings of the pattern field, contains a substring `"{ampm}"`. For [[DateTimeFormat]], the field value must be a string pattern which contains the strings `"{0}"` and `"{1}"`.
           </ins>
          </li>
       </ul>
@@ -379,6 +363,9 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
             1. Else, let _v_ be *undefined*.
           1. Else,
             1. Let _v_ be the value of _dtf_'s internal slot whose name is the Internal Slot value of the current row.
+          1. <ins>If the Internal Slot value of the current row is an Internal Slot value in <emu-xref href="#table-datetimeformat-components"></emu-xref>, then</ins>
+            1. <ins>If _dtf_.[[DateStyle]] is not *undefined* or _dtf_.[[TimeStyle]] is not *undefined*, then</ins>
+              1. <ins>Let _v_ be *undefined*.</ins>
           1. If _v_ is not *undefined*, then
             1. Perform ! CreateDataPropertyOrThrow(_options_, _p_, _v_).
         1. Return _options_.
@@ -500,7 +487,7 @@ contributors: Zibi Braniecki, Daniel Ehrenberg
       <li>[[NumberingSystem]] is a String value with the `"type"` given in Unicode Technical Standard 35 for the numbering system used for formatting.</li>
       <li>[[TimeZone]] is a String value with the IANA time zone name of the time zone used for formatting.</li>
       <li>[[Weekday]], [[Era]], [[Year]], [[Month]], [[Day]], [[Hour]], [[Minute]], [[Second]], [[TimeZoneName]] are each either *undefined*, indicating that the component is not used for formatting, or one of the String values given in <emu-xref href="#table-datetimeformat-components"></emu-xref>, indicating how the component should be presented in the formatted output.</li>
-      <li>[[HourCycle]] is a String value indicating whether the 12-hour format (`"h11"`, `"h12"`) or the 24-hour format (`"h23"`, `"h24"`) should be used. `"h11"` and `"h23"` start with hour 0 and go up to 11 and 23 respectively. `"h12"` and `"h24"` start with hour 1 and go up to 12 and 24. [[HourCycle]] is only used when <del>[[Hour]] is not *undefined*</del><ins>[[Pattern]] includes an hour component</ins>.</li>
+      <li>[[HourCycle]] is a String value indicating whether the 12-hour format (`"h11"`, `"h12"`) or the 24-hour format (`"h23"`, `"h24"`) should be used. `"h11"` and `"h23"` start with hour 0 and go up to 11 and 23 respectively. `"h12"` and `"h24"` start with hour 1 and go up to 12 and 24. [[HourCycle]] is only used when [[Hour]] is not *undefined*.</li>
       <li><ins>[[DateStyle]], [[TimeStyle]] are each either *undefined*, or a String value with values `"full"`, `"long"`, `"medium"`, or `"short"`.</ins></li>
       <li>[[Pattern]] is a String value as described in <emu-xref href="#sec-intl.datetimeformat-internal-slots"></emu-xref>.</li>
     </ul>
