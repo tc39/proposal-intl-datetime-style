@@ -18,7 +18,8 @@ Spec Text:
 
 ### Reviewers
 
- * ?
+ * Frank Tang (@FrankYFTang)
+ * Nathan Hammond (@nathanhammond)
 
 ### Informative
 
